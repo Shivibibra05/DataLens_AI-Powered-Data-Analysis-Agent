@@ -21,9 +21,12 @@ DataLens is an intelligent data analytics application that allows users to uploa
 
 ## Tech Stack
 
--Python 3.10+
--Streamlit (Frontend UI)
--Gemini 2.5 Flash (LLM for SQL generation)
--DuckDB (In-memory database engine)
--Pandas (Data handling)
--Plotly & Seaborn (Visualization)
+1. Python 3.10+
+2. Streamlit (Frontend UI)
+3. Gemini 2.5 Flash (LLM for SQL generation)
+4. DuckDB (In-memory database engine)
+5. Pandas (Data handling)
+6. Plotly & Seaborn (Visualization)
+
+## Live Demo  
+[Open DataLens App in your browser](https://datalensai-powered-data-analysis-agent-xmocgkpen2dapt2hs4dyv8.streamlit.app/)
