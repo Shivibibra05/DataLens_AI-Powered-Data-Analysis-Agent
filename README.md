@@ -1,4 +1,4 @@
-#**DataLens: AI-Powered Data Analysis**
+# DataLens: AI-Powered Data Analysis
 
 DataLens is an intelligent data analytics application that allows users to upload datasets, ask questions in plain English, and instantly receive analytical results, SQL queries, and visualizations. The system uses Google Gemini’s Large Language Model to interpret natural language and generate accurate SQL queries, making data analysis accessible to both technical and non-technical users.
 
@@ -21,9 +21,9 @@ DataLens is an intelligent data analytics application that allows users to uploa
 
 **Tech Stack**
 
-Python 3.10+
-Streamlit (Frontend UI)
-Gemini 2.5 Flash (LLM for SQL generation)
-DuckDB (In-memory database engine)
-Pandas (Data handling)
-Plotly & Seaborn (Visualization)
+-Python 3.10+
+-Streamlit (Frontend UI)
+-Gemini 2.5 Flash (LLM for SQL generation)
+-DuckDB (In-memory database engine)
+-Pandas (Data handling)
+-Plotly & Seaborn (Visualization)
