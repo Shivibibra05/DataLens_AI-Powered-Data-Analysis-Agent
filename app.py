@@ -8,13 +8,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import re
 import google.generativeai as genai
-import openpyxl # Import openpyxl to ensure pandas can read .xlsx
+import openpyxl 
 
-# --------------------------------
-# Custom CSS for Blue Theme
-# --------------------------------
+
 def apply_custom_theme():
-    # (CSS code is identical to your original, so it's hidden here for brevity)
+    
     st.markdown("""
     <style>
     /* Main background */
@@ -159,7 +157,7 @@ def preprocess_and_save(file):
         if file.name.endswith('.csv'):
             df = pd.read_csv(file, encoding='utf-8', na_values=['NA', 'N/A', 'missing'])
         elif file.name.endswith('.xlsx'):
-            # This requires the 'openpyxl' package to be in requirements.txt
+            
             df = pd.read_excel(file, na_values=['NA', 'N/A', 'missing'])
         elif file.name.endswith('.json'):
             df = pd.read_json(file)
@@ -169,7 +167,7 @@ def preprocess_and_save(file):
             st.error("❌ Unsupported file format. Please upload a CSV, Excel, JSON, or TXT file.")
             return None, None, None
 
-        # Clean string/numeric fields
+        
         for col in df.select_dtypes(include=['object']):
             df[col] = df[col].astype(str).replace({r'"': '""'}, regex=True)
         for col in df.columns:
@@ -192,7 +190,6 @@ def preprocess_and_save(file):
         st.error(f"⚠️ Error processing file: {e}")
         return None, None, None
 
-# --------------------------------
 # Utility: Extract SQL and Explanation
 # --------------------------------
 def extract_sql_and_answer(response_text):
@@ -214,7 +211,6 @@ st.markdown("### AI-powered Data Analysis ")
 st.markdown("*Upload your dataset and ask  questions*")
 
 # --- MODIFICATION: API Key Handling ---
-# 1. REMOVE the API key input from the sidebar
 with st.sidebar:
     st.header("Quick Guide")
     st.info("""
@@ -232,7 +228,6 @@ with st.sidebar:
     
    
 # 2. ADD check for Streamlit Secrets
-# This function will run the app
 def run_app():
     # --------------------------------
     # File Upload Section
@@ -247,7 +242,7 @@ def run_app():
             st.markdown("---")
             st.subheader(" Data Preview")
             
-            # (HTML Table code is identical to your original...)
+            
             html_table = df.head(10).to_html(index=False, escape=False, classes='styled-table')
             styled_table = f"""
             <div style="background-color: #2d3748; padding: 20px; border-radius: 8px; overflow-x: auto;">
@@ -300,12 +295,12 @@ def run_app():
 
                         try:
                             # 3. CONFIGURE Gemini with the secret key
-                            # We already configured this before calling run_app()
+                            
                             model = genai.GenerativeModel("models/gemini-2.5-flash")
                             response = model.generate_content(prompt)
                             content = response.text
 
-                            # (The rest of the app logic is identical...)
+                            
                             sql_query, explanation = extract_sql_and_answer(content)
 
                             st.markdown("---")
@@ -423,7 +418,6 @@ def run_app():
                             st.error(f"⚠️ Gemini API Error: {genai_err}")
 
 # --- Main execution ---
-# Check if the secret is set
 if "GEMINI_API_KEY" not in st.secrets:
     st.error("🛑 Gemini API Key not found.")
     st.info("Please add your Gemini API Key to Streamlit Secrets to run this app.")
@@ -434,9 +428,10 @@ else:
     try:
         api_key = st.secrets["GEMINI_API_KEY"]
         genai.configure(api_key=api_key)
-        # Run the main app
+        
         run_app()
     except Exception as e:
         st.error(f"⚠️ Error configuring Gemini API: {e}")
         st.stop()
+
 
